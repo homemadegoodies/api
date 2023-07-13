@@ -53,6 +53,7 @@ namespace API.Controllers
             existingKitchen.Name = kitchen.Name;
             existingKitchen.Description = kitchen.Description;
             existingKitchen.ImageURL = kitchen.ImageURL;
+            existingKitchen.Category = kitchen.Category;
 
             try
             {
@@ -77,6 +78,14 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<Kitchen>> PostKitchen(Kitchen kitchen)
         {
+            // check if vendor exists
+            var vendor = await _context.Vendors.FindAsync(kitchen.VendorId);
+
+            if (vendor == null)
+            {
+                return BadRequest("Vendor not found.");
+            }
+
             // check if kitchen already exists
             var existingKitchen = await _context.Kitchens.FirstOrDefaultAsync(c => c.Name == kitchen.Name);
 
@@ -95,14 +104,6 @@ namespace API.Controllers
             if (!kitchen.ImageURL.Contains("http"))
             {
                 return BadRequest("ImageURL is not valid.");
-            }
-
-            // check if vendor exists
-            var vendor = await _context.Vendors.FindAsync(kitchen.VendorId);
-
-            if (vendor == null)
-            {
-                return BadRequest("Vendor not found.");
             }
 
             kitchen.Vendor = vendor;

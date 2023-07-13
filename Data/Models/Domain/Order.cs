@@ -47,28 +47,28 @@ namespace Data.Models.Domain
     }
     public class OrderProduct
     {
-        [Column("product_id")]
+        [JsonPropertyName("productId")]
         [Required]
         [ForeignKey(nameof(ProductId))]
         public Guid ProductId { get; set; }
         [JsonIgnore]
         public Product? Product { get; set; }
-        [Column("quantity")]
+        [JsonPropertyName("quantity")]
         [Required]
         public int Quantity { get; set; }
     }
     public class PaymentDetail
     {
-        [Column("payment_method")]
+        [JsonPropertyName("paymentMethod")]
         [Required]
         public string PaymentMethod { get; set; }
-        [Column("payment_status")]
+        [JsonPropertyName("paymentStatus")]
         [Required]
         public string PaymentStatus { get; set; }
-        [Column("payment_amount")]
+        [JsonPropertyName("paymentAmount")]
         [Required]
         public double PaymentAmount { get; set; }
-        [Column("payment_date")]
+        [JsonPropertyName("paymentDate")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime PaymentDate { get; set; } = DateTime.Now;

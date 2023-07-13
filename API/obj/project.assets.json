@@ -11782,11 +11782,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\salih\\Projects\\Apps\\HomemadeGoodies\\Server\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\salih\\Desktop\\hg\\server\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "C:\\Users\\salih\\Projects\\Apps\\HomemadeGoodies\\Server\\API\\API.csproj",
+      "projectPath": "C:\\Users\\salih\\Desktop\\hg\\server\\API\\API.csproj",
       "packagesPath": "C:\\Users\\salih\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\salih\\Projects\\Apps\\HomemadeGoodies\\Server\\API\\obj\\",
+      "outputPath": "C:\\Users\\salih\\Desktop\\hg\\server\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\salih\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -11803,8 +11803,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\salih\\Projects\\Apps\\HomemadeGoodies\\Server\\Data\\Data.csproj": {
-              "projectPath": "C:\\Users\\salih\\Projects\\Apps\\HomemadeGoodies\\Server\\Data\\Data.csproj"
+            "C:\\Users\\salih\\Desktop\\hg\\server\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\salih\\Desktop\\hg\\server\\Data\\Data.csproj"
             }
           }
         }

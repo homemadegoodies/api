@@ -57,15 +57,8 @@ namespace API.Controllers
                 return NotFound("Customer not found.");
             }
 
-            // check if the fave Title already exists
-            // var existingFaveTitle = await _context.Faves.Where(f => f.Title == fave.Title && f.CustomerId == customer.Id).FirstOrDefaultAsync();
-            // if (existingFaveTitle != null)
-            // {
-            //     return BadRequest("Fave already exists.");
-            // }
-
             // update the fave
-            existingFave.FaveProducts = fave.FaveProducts;
+            existingFave.ProductId = fave.ProductId;
 
             try
             {
@@ -99,7 +92,7 @@ namespace API.Controllers
             }
 
             // check if fave already exists
-            var existingFave = await _context.Faves.Where(f => f.FaveProducts == fave.FaveProducts && f.CustomerId == customerId).FirstOrDefaultAsync();
+            var existingFave = await _context.Faves.Where(f => f.ProductId == fave.ProductId && f.CustomerId == customerId).FirstOrDefaultAsync();
             if (existingFave != null)
             {
                 return BadRequest("Fave already exists.");

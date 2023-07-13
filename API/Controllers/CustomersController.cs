@@ -92,7 +92,7 @@ namespace API.Controllers
             _context.Customers.Remove(customer);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Customer deleted.");
         }
 
         private bool CustomerExists(Guid id)

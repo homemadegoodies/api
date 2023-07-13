@@ -68,7 +68,6 @@ namespace API.Controllers
             existingProduct.Name = product.Name;
             existingProduct.Description = product.Description;
             existingProduct.Price = product.Price;
-            existingProduct.KitchenId = product.KitchenId;
             existingProduct.ImageURL = product.ImageURL;
             existingProduct.Recipe = product.Recipe;
             existingProduct.Ingredients = product.Ingredients;

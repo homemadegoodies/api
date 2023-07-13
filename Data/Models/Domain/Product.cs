@@ -59,11 +59,11 @@ namespace Data.Models.Domain
 
     public class Ingredient
     {
-        [JsonPropertyName("ingredientName")]
-        [Required]
-        public string? IngredientName { get; set; }
         [JsonPropertyName("ingredientQuantity")]
         [Required]
         public string? IngredientQuantity { get; set; }
+        [JsonPropertyName("ingredientName")]
+        [Required]
+        public string? IngredientName { get; set; }
     }
 }

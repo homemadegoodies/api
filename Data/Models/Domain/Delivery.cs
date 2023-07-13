@@ -59,13 +59,13 @@ namespace Data.Models.Domain
     }
     public class DeliveryProduct
     {
-        [Column("product_id")]
+        [JsonPropertyName("productId")]
         [Required]
         [ForeignKey(nameof(ProductId))]
         public Guid ProductId { get; set; }
         [JsonIgnore]
         public Product? Product { get; set; }
-        [Column("quantity")]
+        [JsonPropertyName("quantity")]
         [Required]
         public int Quantity { get; set; }
     }

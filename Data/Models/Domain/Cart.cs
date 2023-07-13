@@ -42,16 +42,15 @@ namespace Data.Models.Domain
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? UpdatedAt { get; set; } = DateTime.Now;
     }
-    [Table("cart_products")]
     public class CartProduct
     {
-        [Column("product_id")]
+        [JsonPropertyName("productId")]
         [Required]
         [ForeignKey(nameof(ProductId))]
         public Guid ProductId { get; set; }
         [JsonIgnore]
         public Product? Product { get; set; }
-        [Column("quantity")]
+        [JsonPropertyName("quantity")]
         [Required]
         public int Quantity { get; set; }
     }

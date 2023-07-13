@@ -92,7 +92,7 @@ namespace API.Controllers
             _context.Vendors.Remove(vendor);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Vendor deleted.");
         }
 
         private bool VendorExists(Guid id)
