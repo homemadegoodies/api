@@ -13,7 +13,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.8",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.8",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.18.1",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.14"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.14",
+          "Stripe.net": "41.24.0"
         },
         "runtime": {
           "API.dll": {}
@@ -1907,6 +1908,18 @@
           "lib/netstandard2.1/Sprache.dll": {
             "assemblyVersion": "2.3.1.0",
             "fileVersion": "2.3.1.0"
+          }
+        }
+      },
+      "Stripe.net/41.24.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1",
+          "System.Configuration.ConfigurationManager": "6.0.0"
+        },
+        "runtime": {
+          "lib/net6.0/Stripe.net.dll": {
+            "assemblyVersion": "41.24.0.0",
+            "fileVersion": "41.24.0.0"
           }
         }
       },
@@ -3820,6 +3833,13 @@
       "sha512": "sha512-Q+mXeiTxiUYG3lKYF6TS82/SyB4F2613Q1yXTMwg4jWGHEEVC3yrzHtNcI4B3qnDI0+eJsezGJ0V+cToUytHWw==",
       "path": "sprache/2.3.1",
       "hashPath": "sprache.2.3.1.nupkg.sha512"
+    },
+    "Stripe.net/41.24.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rhoANzBzrJOxzrCOILnn98IMnGJwYeAbutz2VLqtQaBciSpMie4kaxXQUICzDn9PSYryfuxi4zV5ObOcCB6lvg==",
+      "path": "stripe.net/41.24.0",
+      "hashPath": "stripe.net.41.24.0.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",

@@ -1,6 +1,8 @@
 using Data.Contexts;
 using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Stripe;
 
 Env.Load();
 
@@ -25,6 +27,9 @@ builder.Services.AddDbContext<GoodiesDataContext>(
 
 // For InvalidCastException
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+// Add StripeService to the container
+builder.Services.AddScoped<StripeService>();
 
 // Add services to the container.
 builder.Services.AddControllers();

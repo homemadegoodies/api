@@ -542,3 +542,4 @@ C:\Users\salih\Desktop\hg\server\API\obj\Debug\net6.0\refint\API.dll
 C:\Users\salih\Desktop\hg\server\API\obj\Debug\net6.0\API.pdb
 C:\Users\salih\Desktop\hg\server\API\obj\Debug\net6.0\API.genruntimeconfig.cache
 C:\Users\salih\Desktop\hg\server\API\obj\Debug\net6.0\ref\API.dll
+C:\Users\salih\Desktop\hg\server\API\bin\Debug\net6.0\Stripe.net.dll

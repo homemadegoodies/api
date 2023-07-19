@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json.Serialization;
+using Data.Models.DTO;
 
 namespace Data.Models.Domain
 {
@@ -36,6 +37,11 @@ namespace Data.Models.Domain
         [Column("status")]
         [Required]
         public string Status { get; set; } = "Pending";
+        [Column("delivery_date")]
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime? DeliveryDate { get; set; }
         [Column("created_at")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -44,6 +50,12 @@ namespace Data.Models.Domain
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? UpdatedAt { get; set; } = DateTime.Now;
+
+        public void Update(OrderUpdateDTO orderDTO)
+        {
+            Status = orderDTO.Status;
+            UpdatedAt = DateTime.Now;
+        }
     }
     public class OrderProduct
     {
@@ -56,6 +68,9 @@ namespace Data.Models.Domain
         [JsonPropertyName("quantity")]
         [Required]
         public int Quantity { get; set; }
+        [JsonPropertyName("price")]
+        [Required]
+        public double Price { get; set; }
     }
     public class PaymentDetail
     {

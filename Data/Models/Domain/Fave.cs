@@ -22,12 +22,14 @@ namespace Data.Models.Domain
         public Guid CustomerId { get; set; }
         [JsonIgnore]
         public Customer? Customer { get; set; }
-        [Column("product_id")]
+        [Column("kitchen_id")]
         [Required]
-        [ForeignKey(nameof(ProductId))]
-        public Guid ProductId { get; set; }
+        [ForeignKey(nameof(KitchenId))]
+        public Guid KitchenId { get; set; }
         [JsonIgnore]
-        public Product? Product { get; set; }
+        public Kitchen? Kitchen { get; set; }
+        [Column("fave_products", TypeName = "jsonb")]
+        public List<FaveProduct>? FaveProducts { get; set; } = new List<FaveProduct>();
         [Column("created_at")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -36,5 +38,15 @@ namespace Data.Models.Domain
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? UpdatedAt { get; set; } = DateTime.Now;
+    }
+
+    public class FaveProduct
+    {
+        [JsonPropertyName("productId")]
+        [Required]
+        [ForeignKey(nameof(ProductId))]
+        public Guid ProductId { get; set; }
+        [JsonIgnore]
+        public Product? Product { get; set; }
     }
 }
