@@ -14,7 +14,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(GoodiesDataContext))]
-    [Migration("20230718223859_InitialDatabase")]
+    [Migration("20230727100558_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />
@@ -194,7 +194,7 @@ namespace Data.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("customer_id");
 
-                    b.Property<List<CartProduct>>("FaveProducts")
+                    b.Property<List<FaveProduct>>("FaveProducts")
                         .HasColumnType("jsonb")
                         .HasColumnName("fave_products");
 
@@ -227,6 +227,11 @@ namespace Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("category");
 
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("city");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_at");
@@ -245,6 +250,11 @@ namespace Data.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
+
+                    b.Property<string>("Prices")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("prices");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone")
@@ -277,7 +287,6 @@ namespace Data.Migrations
                         .HasColumnName("customer_id");
 
                     b.Property<DateTime?>("DeliveryDate")
-                        .IsRequired()
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("delivery_date");
 
@@ -307,9 +316,15 @@ namespace Data.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("updated_at");
 
+                    b.Property<Guid>("VendorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("vendor_id");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("VendorId");
 
                     b.ToTable("orders");
                 });
@@ -320,6 +335,10 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
+
+                    b.Property<int>("Calories")
+                        .HasColumnType("integer")
+                        .HasColumnName("calories");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone")
@@ -541,7 +560,15 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Data.Models.Domain.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Customer");
+
+                    b.Navigation("Vendor");
                 });
 
             modelBuilder.Entity("Data.Models.Domain.Product", b =>

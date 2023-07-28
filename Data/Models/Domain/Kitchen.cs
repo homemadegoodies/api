@@ -34,6 +34,12 @@ namespace Data.Models.Domain
         [Column("category")]
         [Required]
         public string Category { get; set; } = string.Empty;
+        [Column("prices")]
+        [Required]
+        public string Prices { get; set; } = string.Empty;
+        [Column("city")]
+        [Required]
+        public string City { get; set; } = string.Empty;
         [Column("created_at")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

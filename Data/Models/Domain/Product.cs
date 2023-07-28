@@ -31,6 +31,9 @@ namespace Data.Models.Domain
         [Column("price")]
         [Required]
         public double Price { get; set; }
+        [Column("calories")]
+        [Required]
+        public int Calories { get; set; }
         [Column("image_url")]
         [Required, MinLength(2), MaxLength(100), Display(Name = "VideoURL")]
         public string ImageURL { get; set; } = string.Empty;
@@ -38,6 +41,10 @@ namespace Data.Models.Domain
         public List<Step> Recipe { get; set; } = new List<Step>();
         [Column("ingredients", TypeName = "jsonb")]
         public List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+        [NotMapped]
+        public bool IsFave { get; set; }
+        [NotMapped]
+        public bool IsCart { get; set; }
         [Column("created_at")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

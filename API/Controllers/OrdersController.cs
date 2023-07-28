@@ -47,6 +47,27 @@ namespace API.Controllers
             return order;
         }
 
+        // GET: api/vendors/{vendorId}/Orders
+        [HttpGet("~/api/vendors/{vendorId}/orders")]
+        public async Task<ActionResult<IEnumerable<Order>>> GetVendorOrders(Guid vendorId)
+        {
+            return await _context.Orders.Where(o => o.VendorId == vendorId).ToListAsync();
+        }
+
+        // GET: api/vendors/{vendorId}/Orders/5
+        [HttpGet("~/api/vendors/{vendorId}/orders/{id}")]
+        public async Task<ActionResult<Order>> GetVendorOrder(Guid vendorId, Guid id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+
+            if (order == null || order.VendorId != vendorId)
+            {
+                return NotFound("Order not found.");
+            }
+
+            return order;
+        }
+
         // GET: api/customers/{customerId}/Orders
         [HttpGet("~/api/customers/{customerId}/orders")]
         public async Task<ActionResult<IEnumerable<Order>>> GetCustomerOrders(Guid customerId)
@@ -101,11 +122,12 @@ namespace API.Controllers
             {
                 Id = Guid.NewGuid(),
                 CustomerId = orderDTO.CustomerId,
+                VendorId = orderDTO.VendorId,
                 KitchenId = orderDTO.KitchenId,
                 OrderProducts = new List<OrderProduct>(),
                 TotalPrice = totalPrice,
                 Status = "Pending",
-                DeliveryDate = DateTime.Now.AddDays(7),
+                // DeliveryDate = DateTime.Now.AddDays(7),
                 CreatedAt = DateTime.Now
             };
 
@@ -155,8 +177,8 @@ namespace API.Controllers
                 await _context.SaveChangesAsync();
 
                 // Delete the cart
-                _context.Carts.Remove(cart);
-                await _context.SaveChangesAsync();
+                // _context.Carts.Remove(cart);
+                // await _context.SaveChangesAsync();
 
                 // Return the created order
                 return CreatedAtAction(nameof(GetOrder), new { id = order.Id, kitchenId = order.KitchenId }, order);
@@ -173,26 +195,28 @@ namespace API.Controllers
             }
         }
 
-        // PUT: api/kitchens/{kitchenId}/Orders/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateOrder(Guid kitchenId, Guid id, [FromBody] OrderUpdateDTO orderDTO)
+        // PUT: api/vendors/{vendorId}/Orders/5
+        [HttpPut("~/api/vendors/{vendorId}/orders/{id}")]
+        public async Task<IActionResult> UpdateOrder(Guid vendorId, Guid id, [FromBody] OrderUpdateDTO orderDTO)
         {
-            // Retrieve the kitchen and validate its existence
-            var kitchen = await _context.Kitchens.FindAsync(kitchenId);
-            if (kitchen == null)
+            // Retrieve the vendor and validate its existence
+            var vendor = await _context.Vendors.FindAsync(vendorId);
+            if (vendor == null)
             {
-                return NotFound("Kitchen not found.");
+                return NotFound("Vendor not found.");
             }
 
             // Retrieve the order and validate its existence
             var order = await _context.Orders.FindAsync(id);
-            if (order == null || order.KitchenId != kitchenId)
+            if (order == null || order.VendorId != vendorId)
             {
                 return NotFound("Order not found.");
             }
 
             // Update the order with the provided data
-            order.Update(orderDTO);
+            order.DeliveryDate = orderDTO.DeliveryDate;
+            order.Status = orderDTO.Status;
+            order.UpdatedAt = DateTime.Now;
 
             try
             {

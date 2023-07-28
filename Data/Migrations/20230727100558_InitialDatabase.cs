@@ -76,17 +76,44 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "kitchens",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    vendor_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: false),
+                    image_url = table.Column<string>(type: "text", nullable: false),
+                    category = table.Column<string>(type: "text", nullable: false),
+                    prices = table.Column<string>(type: "text", nullable: false),
+                    city = table.Column<string>(type: "text", nullable: false),
+                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_kitchens", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_kitchens_vendors_vendor_id",
+                        column: x => x.vendor_id,
+                        principalTable: "vendors",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "orders",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     customer_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    vendor_id = table.Column<Guid>(type: "uuid", nullable: false),
                     kitchen_id = table.Column<Guid>(type: "uuid", nullable: false),
                     order_products = table.Column<List<OrderProduct>>(type: "jsonb", nullable: false),
                     payment_details = table.Column<PaymentDetail>(type: "jsonb", nullable: true),
                     total_price = table.Column<double>(type: "double precision", nullable: false),
                     status = table.Column<string>(type: "text", nullable: false),
-                    delivery_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    delivery_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
@@ -99,26 +126,8 @@ namespace Data.Migrations
                         principalTable: "customers",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "kitchens",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    vendor_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: false),
-                    description = table.Column<string>(type: "text", nullable: false),
-                    image_url = table.Column<string>(type: "text", nullable: false),
-                    category = table.Column<string>(type: "text", nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_kitchens", x => x.id);
                     table.ForeignKey(
-                        name: "FK_kitchens_vendors_vendor_id",
+                        name: "FK_orders_vendors_vendor_id",
                         column: x => x.vendor_id,
                         principalTable: "vendors",
                         principalColumn: "id",
@@ -161,7 +170,7 @@ namespace Data.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     customer_id = table.Column<Guid>(type: "uuid", nullable: false),
                     kitchen_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    fave_products = table.Column<List<CartProduct>>(type: "jsonb", nullable: true),
+                    fave_products = table.Column<List<FaveProduct>>(type: "jsonb", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
@@ -191,6 +200,7 @@ namespace Data.Migrations
                     name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     description = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     price = table.Column<double>(type: "double precision", nullable: false),
+                    calories = table.Column<int>(type: "integer", nullable: false),
                     image_url = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     recipe = table.Column<List<Step>>(type: "jsonb", nullable: false),
                     ingredients = table.Column<List<Ingredient>>(type: "jsonb", nullable: false),
@@ -237,6 +247,11 @@ namespace Data.Migrations
                 name: "IX_orders_customer_id",
                 table: "orders",
                 column: "customer_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_orders_vendor_id",
+                table: "orders",
+                column: "vendor_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_products_kitchen_id",

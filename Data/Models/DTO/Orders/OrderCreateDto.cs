@@ -16,6 +16,8 @@ namespace Data.Models.DTO
         [JsonPropertyName("customerId")]
         [Required]
         public Guid CustomerId { get; set; }
+        [JsonPropertyName("vendorId")]
+        public Guid VendorId { get; set; }
         [JsonPropertyName("kitchenId")]
         [Required]
         public Guid KitchenId { get; set; }

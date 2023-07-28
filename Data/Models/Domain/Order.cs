@@ -21,6 +21,12 @@ namespace Data.Models.Domain
         [Required]
         [ForeignKey(nameof(CustomerId))]
         public Guid CustomerId { get; set; }
+        // vendor id
+        [Column("vendor_id")]
+        [ForeignKey(nameof(VendorId))]
+        public Guid VendorId { get; set; }
+        [JsonIgnore]
+        public Vendor? Vendor { get; set; }
         [Column("kitchen_id")]
         [Required]
         [ForeignKey(nameof(KitchenId))]
@@ -38,7 +44,6 @@ namespace Data.Models.Domain
         [Required]
         public string Status { get; set; } = "Pending";
         [Column("delivery_date")]
-        [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? DeliveryDate { get; set; }
@@ -50,12 +55,6 @@ namespace Data.Models.Domain
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? UpdatedAt { get; set; } = DateTime.Now;
-
-        public void Update(OrderUpdateDTO orderDTO)
-        {
-            Status = orderDTO.Status;
-            UpdatedAt = DateTime.Now;
-        }
     }
     public class OrderProduct
     {
