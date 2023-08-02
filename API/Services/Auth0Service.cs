@@ -16,7 +16,7 @@ namespace API.Services
         public Auth0Service(IConfiguration configuration)
         {
             _configuration = configuration;
-            DotNetEnv.Env.Load();
+            Env.Load();
             _auth0Client = new AuthenticationApiClient(Env.GetString("Auth0__Domain"));
         }
 

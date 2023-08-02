@@ -5,6 +5,8 @@ C:\Users\salih\Desktop\hg\server\API\bin\Debug\net6.0\API.deps.json
 C:\Users\salih\Desktop\hg\server\API\bin\Debug\net6.0\API.runtimeconfig.json
 C:\Users\salih\Desktop\hg\server\API\bin\Debug\net6.0\API.dll
 C:\Users\salih\Desktop\hg\server\API\bin\Debug\net6.0\API.pdb
+C:\Users\salih\Desktop\hg\server\API\bin\Debug\net6.0\Auth0.AuthenticationApi.dll
+C:\Users\salih\Desktop\hg\server\API\bin\Debug\net6.0\Auth0.Core.dll
 C:\Users\salih\Desktop\hg\server\API\bin\Debug\net6.0\Azure.Core.dll
 C:\Users\salih\Desktop\hg\server\API\bin\Debug\net6.0\Azure.Identity.dll
 C:\Users\salih\Desktop\hg\server\API\bin\Debug\net6.0\DotNetEnv.dll
@@ -271,5 +273,3 @@ C:\Users\salih\Desktop\hg\server\API\obj\Debug\net6.0\refint\API.dll
 C:\Users\salih\Desktop\hg\server\API\obj\Debug\net6.0\API.pdb
 C:\Users\salih\Desktop\hg\server\API\obj\Debug\net6.0\API.genruntimeconfig.cache
 C:\Users\salih\Desktop\hg\server\API\obj\Debug\net6.0\ref\API.dll
-C:\Users\salih\Desktop\hg\server\API\bin\Debug\net6.0\Auth0.AuthenticationApi.dll
-C:\Users\salih\Desktop\hg\server\API\bin\Debug\net6.0\Auth0.Core.dll

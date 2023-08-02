@@ -14,7 +14,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(GoodiesDataContext))]
-    [Migration("20230731113036_InitialDatabase")]
+    [Migration("20230802072954_InitialDatabase")]
     partial class InitialDatabase
     {
         /// <inheritdoc />

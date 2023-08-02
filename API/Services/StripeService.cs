@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Stripe;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DotNetEnv;
 
 namespace API.Services
 {
@@ -9,7 +10,7 @@ namespace API.Services
     {
         public StripeService()
         {
-            DotNetEnv.Env.Load(); // Load the .env file
+            Env.Load();
             var secretKey = DotNetEnv.Env.GetString("Stripe__SecretKey");
             StripeConfiguration.ApiKey = secretKey;
         }
