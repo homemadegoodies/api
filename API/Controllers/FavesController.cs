@@ -49,6 +49,38 @@ namespace API.Controllers
             return fave;
         }
 
+        // get kitchen faves
+        [HttpGet("~/api/kitchens/{kitchenId}/faves")]
+        public async Task<ActionResult<IEnumerable<Fave>>> GetKitchenFaves(Guid kitchenId)
+        {
+            var kitchen = await _context.Kitchens.FindAsync(kitchenId);
+
+            if (kitchen == null)
+            {
+                return NotFound("Kitchen not found.");
+            }
+
+            var faves = await _context.Faves
+                .Where(f => f.KitchenId == kitchenId)
+                .ToListAsync();
+
+            return faves;
+        }
+
+        // get kitchen fave
+        [HttpGet("~/api/kitchens/{kitchenId}/faves/{id}")]
+        public async Task<ActionResult<Fave>> GetKitchenFave(Guid kitchenId, Guid id)
+        {
+            var fave = await _context.Faves.FindAsync(id);
+
+            if (fave == null)
+            {
+                return NotFound("Fave not found.");
+            }
+
+            return fave;
+        }
+
         // PUT: api/Faves/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFave(Guid id, Fave fave)

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
+using API.Services;
 
 namespace API.Controllers
 {
@@ -13,9 +14,13 @@ namespace API.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly GoodiesDataContext _context;
-        public CustomersController(GoodiesDataContext context)
+        private readonly Auth0Service _auth0Service;
+        private readonly IConfiguration _configuration;
+        public CustomersController(GoodiesDataContext context, Auth0Service auth0Service, IConfiguration configuration)
         {
             _context = context;
+            _auth0Service = auth0Service;
+            _configuration = configuration;
         }
 
         // GET: api/Customers
@@ -75,7 +80,6 @@ namespace API.Controllers
         //{
         //    _context.Customers.Add(customer);
         //    await _context.SaveChangesAsync();
-
         //    return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
         //}
 
@@ -98,6 +102,24 @@ namespace API.Controllers
         private bool CustomerExists(Guid id)
         {
             return _context.Customers.Any(e => e.Id == id);
+        }
+
+        [HttpPost("register-with-auth0")]
+        public async Task<IActionResult> RegisterWithAuth0(CustomerRegisterRequest request)
+        {
+            var accessTokenResponse = await _auth0Service.RegisterAndIssueToken(request);
+
+            // Return the token or any relevant information to the frontend
+            return Ok(new { AccessToken = accessTokenResponse.AccessToken });
+        }
+
+        [HttpPost("login-with-auth0")]
+        public async Task<IActionResult> LoginWithAuth0(CustomerLoginRequest request)
+        {
+            var accessTokenResponse = await _auth0Service.LoginAndIssueToken(request);
+
+            // Return the token or any relevant information to the frontend
+            return Ok(new { AccessToken = accessTokenResponse.AccessToken });
         }
 
         [HttpPost("register")]
@@ -143,6 +165,7 @@ namespace API.Controllers
                 VerificationToken = CreateRandomToken()
             };
 
+
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
             status.StatusCode = 1;
@@ -150,6 +173,7 @@ namespace API.Controllers
             return Ok(status);
 
         }
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(CustomerLoginRequest request)

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.IO;
+using API.Services;
 
 namespace API.Controllers
 {
@@ -232,6 +233,18 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpPost("~/api/create-payment-intent")]
+        public async Task<ActionResult> CreatePaymentIntent([FromBody] PaymentIntentCreateDTO paymentIntentDTO)
+        {
+            var stripeService = new StripeService();
+            var paymentIntent = await stripeService.CreatePaymentIntent(paymentIntentDTO.Amount);
+
+            return Ok(new { clientSecret = paymentIntent.ClientSecret });
+        }
+
+
+
 
         // DELETE: api/Orders/5
         [HttpDelete("{id}")]

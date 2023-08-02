@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mcuVOSKiUKhrOhEJMcf4iKrsz6Dqo86vbrsgmuLJ1BJxkJMaYZT3ZbvN2l7bSKihHBU9nC7L+Q2LD+9GerxRqw==",
+  "dgSpecHash": "yjiBLT1CTDnpKokmcAW2d2RMgYrZH23TN4BMFnTfxuqdAqGSQ5CPT5T6ygaKT8RFG2GBi0FR+BBquzMwk7cSdA==",
   "success": true,
   "projectFilePath": "C:\\Users\\salih\\Desktop\\hg\\server\\Data\\Data.csproj",
   "expectedPackageFiles": [
@@ -26,6 +26,7 @@
     "C:\\Users\\salih\\.nuget\\packages\\microsoft.extensions.options\\7.0.1\\microsoft.extensions.options.7.0.1.nupkg.sha512",
     "C:\\Users\\salih\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
     "C:\\Users\\salih\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\salih\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\salih\\.nuget\\packages\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
     "C:\\Users\\salih\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\7.0.4\\npgsql.entityframeworkcore.postgresql.7.0.4.nupkg.sha512",
     "C:\\Users\\salih\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",

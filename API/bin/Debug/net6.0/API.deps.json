@@ -8,16 +8,42 @@
     ".NETCoreApp,Version=v6.0": {
       "API/1.0.0": {
         "dependencies": {
+          "Auth0.AuthenticationApi": "7.22.1",
           "Data": "1.0.0",
           "DotNetEnv": "2.5.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.8",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.8",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.18.1",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.14",
+          "Newtonsoft.Json": "13.0.3",
           "Stripe.net": "41.24.0"
         },
         "runtime": {
           "API.dll": {}
+        }
+      },
+      "Auth0.AuthenticationApi/7.22.1": {
+        "dependencies": {
+          "Auth0.Core": "7.22.1",
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.21.0",
+          "System.IdentityModel.Tokens.Jwt": "6.21.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Auth0.AuthenticationApi.dll": {
+            "assemblyVersion": "7.22.1.0",
+            "fileVersion": "7.22.1.0"
+          }
+        }
+      },
+      "Auth0.Core/7.22.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Auth0.Core.dll": {
+            "assemblyVersion": "7.22.1.0",
+            "fileVersion": "7.22.1.0"
+          }
         }
       },
       "Azure.Core/1.24.0": {
@@ -1191,7 +1217,7 @@
         "dependencies": {
           "Humanizer": "2.14.1",
           "Microsoft.CodeAnalysis.CSharp.Features": "4.0.0",
-          "Newtonsoft.Json": "13.0.1",
+          "Newtonsoft.Json": "13.0.3",
           "NuGet.ProjectModel": "6.3.1",
           "System.Collections.Immutable": "6.0.0"
         },
@@ -1552,7 +1578,7 @@
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection": "7.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Templating": "6.0.14",
-          "Newtonsoft.Json": "13.0.1"
+          "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
           "lib/net6.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll": {
@@ -1604,7 +1630,7 @@
           "Microsoft.Build": "17.3.2",
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "4.0.0",
           "Microsoft.DotNet.Scaffolding.Shared": "6.0.14",
-          "Newtonsoft.Json": "13.0.1"
+          "Newtonsoft.Json": "13.0.3"
         },
         "runtime": {
           "lib/net6.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll": {
@@ -1713,11 +1739,11 @@
           "System.Xml.XDocument": "4.3.0"
         }
       },
-      "Newtonsoft.Json/13.0.1": {
+      "Newtonsoft.Json/13.0.3": {
         "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "13.0.0.0",
-            "fileVersion": "13.0.1.25517"
+            "fileVersion": "13.0.3.27908"
           }
         }
       },
@@ -1805,7 +1831,7 @@
       },
       "NuGet.Packaging/6.3.1": {
         "dependencies": {
-          "Newtonsoft.Json": "13.0.1",
+          "Newtonsoft.Json": "13.0.3",
           "NuGet.Configuration": "6.3.1",
           "NuGet.Versioning": "6.3.1",
           "System.Security.Cryptography.Cng": "5.0.0",
@@ -1913,7 +1939,7 @@
       },
       "Stripe.net/41.24.0": {
         "dependencies": {
-          "Newtonsoft.Json": "13.0.1",
+          "Newtonsoft.Json": "13.0.3",
           "System.Configuration.ConfigurationManager": "6.0.0"
         },
         "runtime": {
@@ -2763,6 +2789,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration": "7.0.0",
           "Microsoft.Extensions.Identity.Core": "7.0.8",
+          "Newtonsoft.Json": "13.0.3",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.4"
         },
         "runtime": {
@@ -2776,6 +2803,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Auth0.AuthenticationApi/7.22.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MDqRw/1p249QsF4dVVhFCZhmbXoYYq4fCjT87gYut/AbtUCKkDfFdYkdjAbuYY63wONRNf7D9Y0JHMF5h5tLqw==",
+      "path": "auth0.authenticationapi/7.22.1",
+      "hashPath": "auth0.authenticationapi.7.22.1.nupkg.sha512"
+    },
+    "Auth0.Core/7.22.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-uL6Fqn4Bt0yr1lKQRdjdZm3LffFlSs8i1s3OvrCRSSNM1Oz1dBiyABmVXqy3GSiHmKfQ48KGfvZ+sStjq4v5Ow==",
+      "path": "auth0.core/7.22.1",
+      "hashPath": "auth0.core.7.22.1.nupkg.sha512"
     },
     "Azure.Core/1.24.0": {
       "type": "package",
@@ -3631,12 +3672,12 @@
       "path": "netstandard.library/1.6.1",
       "hashPath": "netstandard.library.1.6.1.nupkg.sha512"
     },
-    "Newtonsoft.Json/13.0.1": {
+    "Newtonsoft.Json/13.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
-      "path": "newtonsoft.json/13.0.1",
-      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "path": "newtonsoft.json/13.0.3",
+      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
     },
     "Npgsql/7.0.4": {
       "type": "package",

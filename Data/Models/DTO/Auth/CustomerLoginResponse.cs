@@ -21,5 +21,6 @@ namespace Data.Models.DTO
         public string? Country { get; set; }
         public string? ProfilePicture { get; set; }
         public bool IsCustomer { get; set; }
+        public bool IsNewUser { get; set; } = false;
     }
 }

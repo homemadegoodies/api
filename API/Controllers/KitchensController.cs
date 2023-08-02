@@ -94,17 +94,6 @@ namespace API.Controllers
                 return BadRequest("Kitchen already exists.");
             }
 
-            // check if image is null
-            if (kitchen.ImageURL == null)
-            {
-                return BadRequest("ImageURL is required.");
-            }
-
-            // check if image is valid
-            if (!kitchen.ImageURL.Contains("http"))
-            {
-                return BadRequest("ImageURL is not valid.");
-            }
 
             kitchen.Vendor = vendor;
             _context.Kitchens.Add(kitchen);

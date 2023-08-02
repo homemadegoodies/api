@@ -1,8 +1,13 @@
 using Data.Contexts;
 using DotNetEnv;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Stripe;
+using API.Services;
 
 Env.Load();
 
@@ -31,12 +36,24 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // Add StripeService to the container
 builder.Services.AddScoped<StripeService>();
 
+// Add Auth0Service to the container
+builder.Services.AddScoped<Auth0Service>();
+
 // Add services to the container.
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/error");
+}
+
 app.UseHttpsRedirection();
 app.UseCors(options =>
     options.WithOrigins("*")
