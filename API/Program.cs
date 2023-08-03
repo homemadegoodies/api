@@ -19,6 +19,8 @@ var envDbDatabase = Env.GetString("DB_DATABASE");
 var envDbUsername = Env.GetString("DB_USERNAME");
 var envDbPassword = Env.GetString("DB_PASSWORD");
 
+// var connectionString = builder.Configuration.GetConnectionString("LocalDbString");
+
 var connectionString = builder.Configuration.GetConnectionString("LiveDbString")
     .Replace("{DB_HOST}", envDbHost)
     .Replace("{DB_PORT}", envDbPort.ToString())

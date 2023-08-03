@@ -74,15 +74,6 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // POST: api/Customers
-        //[HttpPost]
-        //public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
-        //{
-        //    _context.Customers.Add(customer);
-        //    await _context.SaveChangesAsync();
-        //    return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
-        //}
-
         // DELETE: api/Customers/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(Guid id)
@@ -107,16 +98,21 @@ namespace API.Controllers
         [HttpPost("register-with-auth0")]
         public async Task<IActionResult> RegisterWithAuth0(CustomerRegisterRequest request)
         {
-            var accessTokenResponse = await _auth0Service.RegisterAndIssueToken(request);
+            // var accessTokenResponse = await _auth0Service.RegisterCustomerAndIssueToken(request);
+            // Extract the selected role (login_hint) from the request
+            string role = request.Role;
+
+            var accessTokenResponse = await _auth0Service.GetAccessToken(request.Code, role);
 
             // Return the token or any relevant information to the frontend
             return Ok(new { AccessToken = accessTokenResponse.AccessToken });
         }
 
+
         [HttpPost("login-with-auth0")]
         public async Task<IActionResult> LoginWithAuth0(CustomerLoginRequest request)
         {
-            var accessTokenResponse = await _auth0Service.LoginAndIssueToken(request);
+            var accessTokenResponse = await _auth0Service.LoginCustomerAndIssueToken(request);
 
             // Return the token or any relevant information to the frontend
             return Ok(new { AccessToken = accessTokenResponse.AccessToken });

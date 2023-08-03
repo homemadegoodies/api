@@ -35,5 +35,8 @@ namespace Data.Models.DTO
         [Required]
         public string Province { get; set; } = string.Empty;
         public string Country { get; set; } = "Canada";
+        public string Role { get; set; } = string.Empty;
+        public string Code { get; set; } = string.Empty;
+
     }
 }
