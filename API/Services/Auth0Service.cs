@@ -24,7 +24,7 @@ namespace API.Services
         {
             string clientId = Env.GetString("Auth0__ClientId");
             string clientSecret = Env.GetString("Auth0__ClientSecret");
-            string redirectUri = Env.GetString("Auth0__RedirectUri");
+            // string redirectUri = Env.GetString("Auth0__RedirectUri");
 
             // Use the 'role' parameter to determine if it's a customer or vendor registration
             // For example, if (role == "customer"), perform customer registration logic.
