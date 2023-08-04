@@ -8,9 +8,12 @@
     ".NETCoreApp,Version=v6.0": {
       "API/1.0.0": {
         "dependencies": {
-          "Auth0.AuthenticationApi": "7.22.1",
           "Data": "1.0.0",
           "DotNetEnv": "2.5.0",
+          "Google.Apis": "1.61.0",
+          "Google.Apis.Auth": "1.61.0",
+          "Google.Apis.PeopleService.v1": "1.61.0.3093",
+          "Microsoft.AspNetCore.Authentication.Google": "6.0.20",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.8",
           "Microsoft.EntityFrameworkCore.Tools": "7.0.8",
           "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.18.1",
@@ -20,30 +23,6 @@
         },
         "runtime": {
           "API.dll": {}
-        }
-      },
-      "Auth0.AuthenticationApi/7.22.1": {
-        "dependencies": {
-          "Auth0.Core": "7.22.1",
-          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.21.0",
-          "System.IdentityModel.Tokens.Jwt": "6.21.0"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Auth0.AuthenticationApi.dll": {
-            "assemblyVersion": "7.22.1.0",
-            "fileVersion": "7.22.1.0"
-          }
-        }
-      },
-      "Auth0.Core/7.22.1": {
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.3"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Auth0.Core.dll": {
-            "assemblyVersion": "7.22.1.0",
-            "fileVersion": "7.22.1.0"
-          }
         }
       },
       "Azure.Core/1.24.0": {
@@ -91,6 +70,56 @@
           "lib/netstandard1.3/DotNetEnv.dll": {
             "assemblyVersion": "2.5.0.0",
             "fileVersion": "2.5.0.0"
+          }
+        }
+      },
+      "Google.Apis/1.61.0": {
+        "dependencies": {
+          "Google.Apis.Core": "1.61.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.dll": {
+            "assemblyVersion": "1.61.0.0",
+            "fileVersion": "1.61.0.0"
+          }
+        }
+      },
+      "Google.Apis.Auth/1.61.0": {
+        "dependencies": {
+          "Google.Apis": "1.61.0",
+          "Google.Apis.Core": "1.61.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {
+            "assemblyVersion": "1.61.0.0",
+            "fileVersion": "1.61.0.0"
+          },
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {
+            "assemblyVersion": "1.61.0.0",
+            "fileVersion": "1.61.0.0"
+          }
+        }
+      },
+      "Google.Apis.Core/1.61.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {
+            "assemblyVersion": "1.61.0.0",
+            "fileVersion": "1.61.0.0"
+          }
+        }
+      },
+      "Google.Apis.PeopleService.v1/1.61.0.3093": {
+        "dependencies": {
+          "Google.Apis": "1.61.0",
+          "Google.Apis.Auth": "1.61.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.PeopleService.v1.dll": {
+            "assemblyVersion": "1.61.0.3093",
+            "fileVersion": "1.61.0.3093"
           }
         }
       },
@@ -660,6 +689,14 @@
         }
       },
       "MessagePackAnalyzer/2.1.152": {},
+      "Microsoft.AspNetCore.Authentication.Google/6.0.20": {
+        "runtime": {
+          "lib/net6.0/Microsoft.AspNetCore.Authentication.Google.dll": {
+            "assemblyVersion": "6.0.20.0",
+            "fileVersion": "6.0.2023.32106"
+          }
+        }
+      },
       "Microsoft.AspNetCore.Cryptography.Internal/7.0.8": {
         "runtime": {
           "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
@@ -2804,20 +2841,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Auth0.AuthenticationApi/7.22.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-MDqRw/1p249QsF4dVVhFCZhmbXoYYq4fCjT87gYut/AbtUCKkDfFdYkdjAbuYY63wONRNf7D9Y0JHMF5h5tLqw==",
-      "path": "auth0.authenticationapi/7.22.1",
-      "hashPath": "auth0.authenticationapi.7.22.1.nupkg.sha512"
-    },
-    "Auth0.Core/7.22.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-uL6Fqn4Bt0yr1lKQRdjdZm3LffFlSs8i1s3OvrCRSSNM1Oz1dBiyABmVXqy3GSiHmKfQ48KGfvZ+sStjq4v5Ow==",
-      "path": "auth0.core/7.22.1",
-      "hashPath": "auth0.core.7.22.1.nupkg.sha512"
-    },
     "Azure.Core/1.24.0": {
       "type": "package",
       "serviceable": true,
@@ -2838,6 +2861,34 @@
       "sha512": "sha512-BjRAEr3fBXo0+1rbC5Z1NTcYH2z+qnjROXKisR78VtL87UAlseelvg0N3aMAk5Bexuph13IKEmxVk5b9CrpdWw==",
       "path": "dotnetenv/2.5.0",
       "hashPath": "dotnetenv.2.5.0.nupkg.sha512"
+    },
+    "Google.Apis/1.61.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KUVqG6MRC7E8anPOLefqb+wnDeIS6IJ1B09GaXg07vAHGVnGxJ8odAtpnCQCN3aUzao3gFnSSEKawDvFrJpYZQ==",
+      "path": "google.apis/1.61.0",
+      "hashPath": "google.apis.1.61.0.nupkg.sha512"
+    },
+    "Google.Apis.Auth/1.61.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1tXnTa9WaimJdlrIyHnhjjgFX6fQ1r4ClWqlK9ZYF5YPyswG1GbWhhlPyQg615BnHSulmRINlXIi8AbGJsc1yQ==",
+      "path": "google.apis.auth/1.61.0",
+      "hashPath": "google.apis.auth.1.61.0.nupkg.sha512"
+    },
+    "Google.Apis.Core/1.61.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/COXAFLc1SrLDZl7Ahhi0ZyNHM6ADvdd73UjIPXr1MRubHTrBgvdfwoTrCL0C8C6w0ur/RIR1RHUR5orSJozGg==",
+      "path": "google.apis.core/1.61.0",
+      "hashPath": "google.apis.core.1.61.0.nupkg.sha512"
+    },
+    "Google.Apis.PeopleService.v1/1.61.0.3093": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-N7h2xDEKCoTQ+AgExR5x9rIe3zmi4a1EcgF6ph4UxYKLAWyPuQzrLoTgDBMj/344V0zG2fiREwSW1MzgmOe+ig==",
+      "path": "google.apis.peopleservice.v1/1.61.0.3093",
+      "hashPath": "google.apis.peopleservice.v1.1.61.0.3093.nupkg.sha512"
     },
     "Humanizer/2.14.1": {
       "type": "package",
@@ -3209,6 +3260,13 @@
       "sha512": "sha512-uJhZlGMkXDaFYsH8V9S6o1EyvsUqB9mpU4DVBXNr0DXZVzZMhuLP1IkLj5xK3EKlaAcvkFkZv3eSvuz360wb3Q==",
       "path": "messagepackanalyzer/2.1.152",
       "hashPath": "messagepackanalyzer.2.1.152.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Authentication.Google/6.0.20": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VL1BrqPT3tEhdko5YHwkBse47yG+XnRYc78AAbZfUEFCxrEAttCD1BcCuFbNk6eNXXP8/rM2QyrlWqit8gTATw==",
+      "path": "microsoft.aspnetcore.authentication.google/6.0.20",
+      "hashPath": "microsoft.aspnetcore.authentication.google.6.0.20.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Cryptography.Internal/7.0.8": {
       "type": "package",

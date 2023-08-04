@@ -38,8 +38,8 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // Add StripeService to the container
 builder.Services.AddScoped<StripeService>();
 
-// Add Auth0Service to the container
-builder.Services.AddScoped<Auth0Service>();
+// Add GoogleService to the container
+builder.Services.AddScoped<GoogleService>();
 
 // Add services to the container.
 builder.Services.AddControllers();

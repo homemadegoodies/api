@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
+using API.Services;
 
 namespace API.Controllers
 {
@@ -13,9 +14,12 @@ namespace API.Controllers
     public class VendorsController : ControllerBase
     {
         private readonly GoodiesDataContext _context;
-        public VendorsController(GoodiesDataContext context)
+        private readonly GoogleService _googleService;
+
+        public VendorsController(GoodiesDataContext context, GoogleService googleService)
         {
             _context = context;
+            _googleService = googleService;
         }
 
         // GET: api/Vendors
@@ -69,17 +73,6 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // POST: api/Vendors
-        //[HttpPost]
-        //public async Task<ActionResult<Vendor>> PostVendor(Vendor vendor)
-        //{
-        //    _context.Vendors.Add(vendor);
-        //    await _context.SaveChangesAsync();
-
-        //    return CreatedAtAction("GetVendor", new { id = vendor.Id }, vendor);
-        //}
-
-        // DELETE: api/Vendors/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVendor(Guid id)
         {
@@ -176,6 +169,58 @@ namespace API.Controllers
             //{
             //    return BadRequest("Not verified!");
             //}
+
+            return Ok(new VendorLoginResponse
+            {
+                Id = vendor.Id,
+                FirstName = vendor.FirstName,
+                LastName = vendor.LastName,
+                Username = vendor.Username,
+                Email = vendor.Email,
+                ProfilePicture = vendor.ProfilePicture,
+                PhoneNumber = vendor.PhoneNumber,
+                Address = vendor.Address,
+                City = vendor.City,
+                Province = vendor.Province,
+                PostalCode = vendor.PostalCode,
+                Country = vendor.Country,
+                IsVendor = vendor.IsVendor,
+                StatusCode = 1,
+                Message = "Vendor successfully logged in! :D",
+            });
+        }
+
+        [HttpPost("google")]
+        public async Task<IActionResult> GoogleLogin(GoogleLoginRequest request)
+        {
+            var status = new Status();
+            var payload = await _googleService.Verify(request.GoogleIdToken);
+            if (payload == null)
+            {
+                status.StatusCode = 0;
+                status.Message = "Invalid google token.";
+                return Ok(status);
+            }
+
+            var vendor = await _context.Vendors.FirstOrDefaultAsync(u => u.Email == payload.Email);
+            if (vendor == null)
+            {
+                vendor = new Vendor
+                {
+                    FirstName = payload.GivenName,
+                    LastName = payload.FamilyName,
+                    Username = payload.Email,
+                    Email = payload.Email,
+                    ProfilePicture = payload.Picture,
+                    IsVendor = true,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    VerificationToken = CreateRandomToken(),
+                };
+
+                _context.Vendors.Add(vendor);
+                await _context.SaveChangesAsync();
+            }
 
             return Ok(new VendorLoginResponse
             {

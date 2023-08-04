@@ -14,13 +14,12 @@ namespace API.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly GoodiesDataContext _context;
-        private readonly Auth0Service _auth0Service;
-        private readonly IConfiguration _configuration;
-        public CustomersController(GoodiesDataContext context, Auth0Service auth0Service, IConfiguration configuration)
+        private readonly GoogleService _googleService;
+
+        public CustomersController(GoodiesDataContext context, GoogleService googleService)
         {
             _context = context;
-            _auth0Service = auth0Service;
-            _configuration = configuration;
+            _googleService = googleService;
         }
 
         // GET: api/Customers
@@ -93,29 +92,6 @@ namespace API.Controllers
         private bool CustomerExists(Guid id)
         {
             return _context.Customers.Any(e => e.Id == id);
-        }
-
-        [HttpPost("register-with-auth0")]
-        public async Task<IActionResult> RegisterWithAuth0(CustomerRegisterRequest request)
-        {
-            // var accessTokenResponse = await _auth0Service.RegisterCustomerAndIssueToken(request);
-            // Extract the selected role (login_hint) from the request
-            string role = request.Role;
-
-            var accessTokenResponse = await _auth0Service.GetAccessToken(request.Code, role);
-
-            // Return the token or any relevant information to the frontend
-            return Ok(new { AccessToken = accessTokenResponse.AccessToken });
-        }
-
-
-        [HttpPost("login-with-auth0")]
-        public async Task<IActionResult> LoginWithAuth0(CustomerLoginRequest request)
-        {
-            var accessTokenResponse = await _auth0Service.LoginCustomerAndIssueToken(request);
-
-            // Return the token or any relevant information to the frontend
-            return Ok(new { AccessToken = accessTokenResponse.AccessToken });
         }
 
         [HttpPost("register")]
@@ -197,6 +173,55 @@ namespace API.Controllers
             //{
             //    return BadRequest("Not verified!");
             //}
+
+            return Ok(new CustomerLoginResponse
+            {
+                Id = customer.Id,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Username = customer.Username,
+                Email = customer.Email,
+                ProfilePicture = customer.ProfilePicture,
+                PhoneNumber = customer.PhoneNumber,
+                Address = customer.Address,
+                City = customer.City,
+                Province = customer.Province,
+                PostalCode = customer.PostalCode,
+                Country = customer.Country,
+                IsCustomer = customer.IsCustomer,
+                StatusCode = 1,
+                Message = "Customer successfully logged in! :D",
+            });
+        }
+
+        [HttpPost("google")]
+        public async Task<IActionResult> GoogleLogin(GoogleLoginRequest request)
+        {
+            var payload = await _googleService.Verify(request.GoogleIdToken);
+            if (payload == null)
+            {
+                return BadRequest("Invalid google token.");
+            }
+
+            var customer = await _context.Customers.FirstOrDefaultAsync(u => u.Email == payload.Email);
+            if (customer == null)
+            {
+                customer = new Customer
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = payload.GivenName,
+                    LastName = payload.FamilyName,
+                    Username = payload.Email,
+                    Email = payload.Email,
+                    ProfilePicture = payload.Picture,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    VerificationToken = CreateRandomToken()
+                };
+
+                _context.Customers.Add(customer);
+                await _context.SaveChangesAsync();
+            }
 
             return Ok(new CustomerLoginResponse
             {
