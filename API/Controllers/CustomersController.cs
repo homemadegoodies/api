@@ -217,6 +217,7 @@ namespace API.Controllers
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
                     VerificationToken = CreateRandomToken()
+                    // Message = "Customer successfully registered! :D",
                 };
 
                 _context.Customers.Add(customer);
