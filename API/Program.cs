@@ -21,16 +21,16 @@ var envDbPassword = Env.GetString("DB_PASSWORD");
 
 var localConnectionString = builder.Configuration.GetConnectionString("LocalDbString");
 
-// var liveConnectionString = builder.Configuration.GetConnectionString("LiveDbString")
-//     .Replace("{DB_HOST}", envDbHost)
-//     .Replace("{DB_PORT}", envDbPort.ToString())
-//     .Replace("{DB_DATABASE}", envDbDatabase)
-//     .Replace("{DB_USERNAME}", envDbUsername)
-//     .Replace("{DB_PASSWORD}", envDbPassword);
+var liveConnectionString = builder.Configuration.GetConnectionString("LiveDbString")
+    .Replace("{DB_HOST}", envDbHost)
+    .Replace("{DB_PORT}", envDbPort.ToString())
+    .Replace("{DB_DATABASE}", envDbDatabase)
+    .Replace("{DB_USERNAME}", envDbUsername)
+    .Replace("{DB_PASSWORD}", envDbPassword);
 
 // Configure database connections
 builder.Services.AddDbContext<GoodiesDataContext>(
-    options => options.UseNpgsql(localConnectionString));
+    options => options.UseNpgsql(liveConnectionString));
 
 // For InvalidCastException
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
