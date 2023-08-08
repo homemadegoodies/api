@@ -198,6 +198,8 @@ namespace API.Controllers
         public async Task<IActionResult> GoogleLogin(GoogleLoginRequest request)
         {
             var payload = await _googleService.Verify(request.GoogleIdToken);
+            Console.WriteLine("Google Payload:", payload);
+
             if (payload == null)
             {
                 return BadRequest("Invalid google token.");
