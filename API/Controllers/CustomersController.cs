@@ -213,7 +213,7 @@ namespace API.Controllers
                     Id = Guid.NewGuid(),
                     FirstName = payload.GivenName,
                     LastName = payload.FamilyName,
-                    Username = payload.Email,
+                    Username = payload.Email.Split('@')[0],
                     Email = payload.Email,
                     ProfilePicture = payload.Picture,
                     CreatedAt = DateTime.UtcNow,

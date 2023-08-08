@@ -209,7 +209,7 @@ namespace API.Controllers
                 {
                     FirstName = payload.GivenName,
                     LastName = payload.FamilyName,
-                    Username = payload.Email,
+                    Username = payload.Email.Split('@')[0],
                     Email = payload.Email,
                     ProfilePicture = payload.Picture,
                     IsVendor = true,
