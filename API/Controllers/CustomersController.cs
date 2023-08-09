@@ -49,7 +49,7 @@ namespace API.Controllers
         {
             if (id != customer.Id)
             {
-                return BadRequest();
+                return BadRequest("Invalid customer ID.");
             }
 
             _context.Entry(customer).State = EntityState.Modified;
@@ -70,8 +70,9 @@ namespace API.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok("Customer updated.");
         }
+
 
         // DELETE: api/Customers/5
         [HttpDelete("{id}")]

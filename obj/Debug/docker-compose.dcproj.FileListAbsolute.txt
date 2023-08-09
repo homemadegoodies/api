@@ -6,7 +6,6 @@ C:\Users\salih\Desktop\hg\server\bin\Debug\API.exe
 C:\Users\salih\Desktop\hg\server\bin\Debug\API.dll
 C:\Users\salih\Desktop\hg\server\bin\Debug\Microsoft.EntityFrameworkCore.dll
 C:\Users\salih\Desktop\hg\server\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll
-C:\Users\salih\Desktop\hg\server\bin\Debug\Auth0.AuthenticationApi.dll
 C:\Users\salih\Desktop\hg\server\bin\Debug\Data.dll
 C:\Users\salih\Desktop\hg\server\bin\Debug\Stripe.net.dll
 C:\Users\salih\Desktop\hg\server\bin\Debug\DotNetEnv.dll
@@ -22,7 +21,6 @@ C:\Users\salih\Desktop\hg\server\bin\Debug\Microsoft.Extensions.Caching.Memory.d
 C:\Users\salih\Desktop\hg\server\bin\Debug\Microsoft.Extensions.Options.dll
 C:\Users\salih\Desktop\hg\server\bin\Debug\Microsoft.Extensions.Primitives.dll
 C:\Users\salih\Desktop\hg\server\bin\Debug\Newtonsoft.Json.dll
-C:\Users\salih\Desktop\hg\server\bin\Debug\Auth0.Core.dll
 C:\Users\salih\Desktop\hg\server\bin\Debug\Microsoft.Extensions.Identity.Core.dll
 C:\Users\salih\Desktop\hg\server\bin\Debug\System.Configuration.ConfigurationManager.dll
 C:\Users\salih\Desktop\hg\server\bin\Debug\Sprache.dll
@@ -35,4 +33,8 @@ C:\Users\salih\Desktop\hg\server\bin\Debug\Data.pdb
 C:\Users\salih\Desktop\hg\server\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
 C:\Users\salih\Desktop\hg\server\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 C:\Users\salih\Desktop\hg\server\obj\Debug\docker-compose.dcproj.CopyComplete
+C:\Users\salih\Desktop\hg\server\bin\Debug\Google.Apis.PeopleService.v1.dll
+C:\Users\salih\Desktop\hg\server\bin\Debug\Google.Apis.Auth.dll
+C:\Users\salih\Desktop\hg\server\bin\Debug\Google.Apis.Core.dll
+C:\Users\salih\Desktop\hg\server\bin\Debug\Google.Apis.dll
 C:\Users\salih\Desktop\hg\server\bin\Debug\Microsoft.EntityFrameworkCore.Relational.dll

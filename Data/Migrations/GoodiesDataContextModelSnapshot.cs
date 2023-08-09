@@ -388,6 +388,44 @@ namespace Data.Migrations
                     b.ToTable("products");
                 });
 
+            modelBuilder.Entity("Data.Models.Domain.Report", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("customer_id");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("reason");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid>("VendorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("vendor_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("VendorId");
+
+                    b.ToTable("reports");
+                });
+
             modelBuilder.Entity("Data.Models.Domain.Vendor", b =>
                 {
                     b.Property<Guid>("Id")
@@ -577,6 +615,25 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Kitchen");
+                });
+
+            modelBuilder.Entity("Data.Models.Domain.Report", b =>
+                {
+                    b.HasOne("Data.Models.Domain.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Data.Models.Domain.Vendor", "Vendor")
+                        .WithMany()
+                        .HasForeignKey("VendorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Vendor");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,3 +3,6 @@
 
 # Ignore Visual Studio Code directory
 .vscode/
+
+# Ignore Visual Studio directory
+.vs/

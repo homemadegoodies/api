@@ -26,5 +26,6 @@ namespace Data.Contexts
         public DbSet<Fave> Faves { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Report> Reports { get; set; }
     }
 }

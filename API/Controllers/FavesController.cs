@@ -83,7 +83,7 @@ namespace API.Controllers
 
         // PUT: api/Faves/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutFave(Guid id, Fave fave)
+        public async Task<IActionResult> PutFave(Guid id, Guid customerId, Fave fave)
         {
             var existingFave = await _context.Faves.FindAsync(id);
 
@@ -179,7 +179,7 @@ namespace API.Controllers
             _context.Faves.Add(fave);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFave", new { id = fave.Id }, fave);
+            return CreatedAtAction("GetFave", new { customerId = fave.CustomerId, id = fave.Id }, fave);
 
         }
 
