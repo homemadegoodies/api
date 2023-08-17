@@ -47,30 +47,47 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(Guid id, Customer customer)
         {
-            if (id != customer.Id)
+            var existingCustomer = await _context.Customers.FindAsync(id);
+            if (existingCustomer == null)
             {
-                return BadRequest("Invalid customer ID.");
+                return NotFound("Customer not found.");
             }
 
-            _context.Entry(customer).State = EntityState.Modified;
+            if (id != existingCustomer.Id)
+            {
+                return BadRequest("Invalid customer ID");
+            }
 
             try
             {
+                existingCustomer.FirstName = customer.FirstName;
+                existingCustomer.LastName = customer.LastName;
+                existingCustomer.Username = customer.Username;
+                existingCustomer.Email = customer.Email;
+                existingCustomer.Address = customer.Address;
+                existingCustomer.City = customer.City;
+                existingCustomer.PostalCode = customer.PostalCode;
+                existingCustomer.Province = customer.Province;
+                existingCustomer.PhoneNumber = customer.PhoneNumber;
+                existingCustomer.ProfilePicture = customer.ProfilePicture;
+
+                _context.Entry(existingCustomer).State = EntityState.Modified;
+
                 await _context.SaveChangesAsync();
+
+                return Ok("Customer updated.");
             }
             catch (DbUpdateConcurrencyException)
             {
                 if (!CustomerExists(id))
                 {
-                    return NotFound();
+                    return NotFound("Customer not found.");
                 }
                 else
                 {
                     throw;
                 }
             }
-
-            return Ok("Customer updated.");
         }
 
 

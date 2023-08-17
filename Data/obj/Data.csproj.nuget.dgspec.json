@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\salih\\Desktop\\hg\\server\\Data\\Data.csproj": {}
+    "C:\\Users\\salih\\Projects\\Apps\\HomemadeGoodies\\server\\Data\\Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\salih\\Desktop\\hg\\server\\Data\\Data.csproj": {
+    "C:\\Users\\salih\\Projects\\Apps\\HomemadeGoodies\\server\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\salih\\Desktop\\hg\\server\\Data\\Data.csproj",
+        "projectUniqueName": "C:\\Users\\salih\\Projects\\Apps\\HomemadeGoodies\\server\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\Users\\salih\\Desktop\\hg\\server\\Data\\Data.csproj",
+        "projectPath": "C:\\Users\\salih\\Projects\\Apps\\HomemadeGoodies\\server\\Data\\Data.csproj",
         "packagesPath": "C:\\Users\\salih\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\salih\\Desktop\\hg\\server\\Data\\obj\\",
+        "outputPath": "C:\\Users\\salih\\Projects\\Apps\\HomemadeGoodies\\server\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\salih\\AppData\\Roaming\\NuGet\\NuGet.Config",

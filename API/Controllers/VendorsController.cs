@@ -47,30 +47,47 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVendor(Guid id, Vendor vendor)
         {
-            if (id != vendor.Id)
+            var existingVendor = await _context.Vendors.FindAsync(id);
+            if (existingVendor == null)
             {
-                return BadRequest();
+                return NotFound("Vendor not found.");
             }
 
-            _context.Entry(vendor).State = EntityState.Modified;
+            if (id != existingVendor.Id)
+            {
+                return BadRequest("Invalid vendor ID.");
+            }
 
             try
             {
+                existingVendor.FirstName = vendor.FirstName;
+                existingVendor.LastName = vendor.LastName;
+                existingVendor.Username = vendor.Username;
+                existingVendor.Email = vendor.Email;
+                existingVendor.Address = vendor.Address;
+                existingVendor.City = vendor.City;
+                existingVendor.PostalCode = vendor.PostalCode;
+                existingVendor.Province = vendor.Province;
+                existingVendor.PhoneNumber = vendor.PhoneNumber;
+                existingVendor.ProfilePicture = vendor.ProfilePicture;
+
+                _context.Entry(existingVendor).State = EntityState.Modified;
+
                 await _context.SaveChangesAsync();
+
+                return Ok("Vendor updated.");
             }
             catch (DbUpdateConcurrencyException)
             {
                 if (!VendorExists(id))
                 {
-                    return NotFound();
+                    return NotFound("Vendor not found.");
                 }
                 else
                 {
                     throw;
                 }
             }
-
-            return NoContent();
         }
 
         [HttpDelete("{id}")]
