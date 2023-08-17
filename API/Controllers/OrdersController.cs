@@ -157,7 +157,7 @@ namespace API.Controllers
                 var paymentRequest = new PaymentIntentCreateOptions
                 {
                     Amount = Convert.ToInt64(order.TotalPrice * 100), // Stripe requires the amount in cents
-                    Currency = "CAD", // Set the currency according to your needs
+                    Currency = "CAD",
                     PaymentMethodTypes = new List<string> { "card" } // Only accept card payments
                 };
 
@@ -176,10 +176,6 @@ namespace API.Controllers
                 // Save the order to the database
                 _context.Orders.Add(order);
                 await _context.SaveChangesAsync();
-
-                // Delete the cart
-                // _context.Carts.Remove(cart);
-                // await _context.SaveChangesAsync();
 
                 // Return the created order
                 return CreatedAtAction(nameof(GetOrder), new { id = order.Id, kitchenId = order.KitchenId }, order);

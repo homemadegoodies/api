@@ -51,14 +51,13 @@ namespace API.Services
             {
                 var payload = await GoogleJsonWebSignature.ValidateAsync(idToken, new GoogleJsonWebSignature.ValidationSettings
                 {
-                    Audience = new[] { _googleClientId } // Your Google Client ID
+                    Audience = new[] { _googleClientId }
                 });
 
                 return payload;
             }
             catch (Exception ex)
             {
-                // Log the exception or handle it as needed
                 return null; // Return null to indicate invalid token
             }
         }

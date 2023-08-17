@@ -11,7 +11,7 @@ namespace API.Services
         public StripeService()
         {
             Env.Load();
-            var secretKey = DotNetEnv.Env.GetString("Stripe__SecretKey");
+            var secretKey = Env.GetString("Stripe__SecretKey");
             StripeConfiguration.ApiKey = secretKey;
         }
 
@@ -20,7 +20,7 @@ namespace API.Services
             var options = new PaymentIntentCreateOptions
             {
                 Amount = (long)(amount * 100), // Stripe amount is in cents
-                Currency = "CAD", // Replace with your desired currency code
+                Currency = "CAD",
                 PaymentMethodTypes = new List<string> { "card" } // Accept card payments
             };
 
