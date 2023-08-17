@@ -121,7 +121,7 @@ namespace API.Controllers
                 return Ok(status);
             }
 
-            if (_context.Vendors.Any(u => u.Username == request.Username))
+            if (_context.Vendors.Any(v => v.Username == request.Username))
             {
                 status.StatusCode = 0;
                 status.Message = "Invalid username.";
@@ -163,7 +163,7 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(VendorLoginRequest request)
         {
-            var vendor = await _context.Vendors.FirstOrDefaultAsync(u => u.Username == request.Username);
+            var vendor = await _context.Vendors.FirstOrDefaultAsync(v => v.Username == request.Username);
             if (vendor == null)
             {
                 return Ok(new VendorLoginResponse
@@ -219,7 +219,7 @@ namespace API.Controllers
                 return Ok(status);
             }
 
-            var vendor = await _context.Vendors.FirstOrDefaultAsync(u => u.Email == payload.Email);
+            var vendor = await _context.Vendors.FirstOrDefaultAsync(v => v.Email == payload.Email);
             if (vendor == null)
             {
                 vendor = new Vendor
@@ -262,7 +262,7 @@ namespace API.Controllers
         // [HttpPost("verify")]
         // public async Task<IActionResult> Verify(string token)
         // {
-        //     var vendor = await _context.Vendors.FirstOrDefaultAsync(u => u.VerificationToken == token);
+        //     var vendor = await _context.Vendors.FirstOrDefaultAsync(v => v.VerificationToken == token);
         //     if (vendor == null)
         //     {
         //         return BadRequest("Invalid token.");
@@ -275,28 +275,37 @@ namespace API.Controllers
         // }
 
         [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword(string username)
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest request)
         {
-            var vendor = await _context.Vendors.FirstOrDefaultAsync(u => u.Username == username);
+            var vendor = await _context.Vendors.FirstOrDefaultAsync(v => v.Username == request.Username);
             if (vendor == null)
             {
-                return BadRequest("Vendor not found.");
+                return Ok("Vendor not found.");
             }
 
             vendor.PasswordResetToken = CreateRandomToken();
             vendor.ResetTokenExpires = DateTime.Now.AddDays(1);
             await _context.SaveChangesAsync();
 
-            return Ok("You may now reset your password.");
+            return Ok(
+                new ForgotPasswordResponse
+                {
+                    StatusCode = 1,
+                    PasswordResetToken = vendor.PasswordResetToken,
+                    Message = "You may now reset your password. :)",
+                    Username = vendor.Username
+                }
+            );
         }
+
 
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword(ResetPasswordRequest request)
         {
-            var vendor = await _context.Vendors.FirstOrDefaultAsync(u => u.PasswordResetToken == request.Token);
+            var vendor = await _context.Vendors.FirstOrDefaultAsync(v => v.PasswordResetToken == request.Token);
             if (vendor == null || vendor.ResetTokenExpires < DateTime.Now)
             {
-                return BadRequest("Invalid Token.");
+                return Ok("Invalid Token.");
             }
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
@@ -308,7 +317,14 @@ namespace API.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok("Password successfully reset. :)");
+            return Ok(
+                new ResetPasswordResponse
+                {
+                    StatusCode = 1,
+                    Message = "Password successfully reset. :D",
+                    Username = vendor.Username
+                }
+            );
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
