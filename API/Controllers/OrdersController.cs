@@ -104,7 +104,7 @@ namespace API.Controllers
 
             // Retrieve the cart and validate its existence
             var cart = await _context.Carts.FindAsync(cartId);
-            if (cart == null || cart.CustomerId != customerId || cart.KitchenId != orderDTO.KitchenId)
+            if (cart == null)
             {
                 return NotFound("Cart not found.");
             }
