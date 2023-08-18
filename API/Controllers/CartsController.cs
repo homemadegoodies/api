@@ -215,6 +215,14 @@ namespace API.Controllers
             {
                 return NotFound("Product not found in cart.");
             }
+
+            if (cart.CartProducts.Count == 1)
+            {
+                _context.Carts.Remove(cart);
+                await _context.SaveChangesAsync();
+                return Ok("Cart deleted.");
+            }
+
             cart.CartProducts.Remove(cartProduct);
             await _context.SaveChangesAsync();
             return Ok("Product deleted from cart.");
