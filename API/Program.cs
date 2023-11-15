@@ -1,12 +1,7 @@
 using Data.Contexts;
 using DotNetEnv;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Stripe;
+
 using API.Services;
 
 Env.Load();
@@ -19,10 +14,7 @@ var envDbDatabase = Env.GetString("DB_DATABASE");
 var envDbUsername = Env.GetString("DB_USERNAME");
 var envDbPassword = Env.GetString("DB_PASSWORD");
 
-// var localConnectionString = builder.Configuration.GetConnectionString("LocalDbString");
-
-// builder.Services.AddDbContext<GoodiesDataContext>(
-//     options => options.UseNpgsql(localConnectionString));
+var localConnectionString = builder.Configuration.GetConnectionString("LocalDbString");
 
 var liveConnectionString = builder.Configuration.GetConnectionString("LiveDbString")
     .Replace("{DB_HOST}", envDbHost)
@@ -32,8 +24,16 @@ var liveConnectionString = builder.Configuration.GetConnectionString("LiveDbStri
     .Replace("{DB_PASSWORD}", envDbPassword);
 
 // Configure database connections
-builder.Services.AddDbContext<GoodiesDataContext>(
-    options => options.UseNpgsql(liveConnectionString));
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<GoodiesDataContext>(
+        options => options.UseNpgsql(localConnectionString));
+}
+else
+{
+    builder.Services.AddDbContext<GoodiesDataContext>(
+        options => options.UseNpgsql(liveConnectionString));
+}
 
 // For InvalidCastException
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
